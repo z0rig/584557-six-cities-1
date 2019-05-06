@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
-* Студент: [Igor Zorin](https://up.htmlacademy.ru/react/1/user/584557).
-* Наставник: `Неизвестно`.
+- Студент: [Igor Zorin](https://up.htmlacademy.ru/react/1/user/584557).
+- Наставник: `Артем Приходько`.
 
 ---
 
