@@ -3,7 +3,7 @@ import React, {Fragment} from "react";
 import PlacesList from "../places-list/places-list.jsx";
 
 const App = () => {
-  const placesHeaders = [
+  const placesTitles = [
     `Old palace`,
     `Dilapidated bungalow`,
     `Haunted Apartment`,
@@ -155,7 +155,7 @@ const App = () => {
                   </option>
                 </select>*/}
               </form>
-              <PlacesList headers={placesHeaders} />
+              <PlacesList titles={placesTitles} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map" />
