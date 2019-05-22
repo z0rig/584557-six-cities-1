@@ -1,15 +1,10 @@
 import React, {Fragment} from "react";
+import PropTypes from "prop-types";
 
 import PlacesList from "../places-list/places-list.jsx";
 
-const App = () => {
-  const placesTitles = [
-    `Old palace`,
-    `Dilapidated bungalow`,
-    `Haunted Apartment`,
-    `Hostel in the basement`
-  ];
-
+const App = (props) => {
+  const {offers} = props;
   return (
     <Fragment>
       <div style={{display: `none`}}>
@@ -155,7 +150,7 @@ const App = () => {
                   </option>
                 </select>*/}
               </form>
-              <PlacesList titles={placesTitles} />
+              <PlacesList offers={offers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map" />
@@ -165,6 +160,10 @@ const App = () => {
       </main>
     </Fragment>
   );
+};
+
+App.propTypes = {
+  offers: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default App;

@@ -3,28 +3,58 @@ import PropTypes from "prop-types";
 
 import PalceCard from "../place-card/place-card.jsx";
 
-const PlacesList = (props) => {
-  const {titles} = props;
+class PlacesList extends React.PureComponent {
+  constructor(props) {
+    super(props);
 
-  return (
-    <div className="cities__places-list places__list tabs__content">
-      {titles.map((title, ind) => {
-        return (
-          <PalceCard
-            key={ind}
-            title={title}
-            headerClickHandler={() => {
-              return 1;
-            }}
-          />
-        );
-      })}
-    </div>
-  );
-};
+    this.state = {
+      activeCardId: null
+    };
+
+    this._imgClickHandler = this._imgClickHandler.bind(this);
+    this._setActiveCardId = this._setActiveCardId.bind(this);
+    this._resetActiveCardId = this._resetActiveCardId.bind(this);
+  }
+
+  render() {
+    const {offers} = this.props;
+
+    return (
+      <div className="cities__places-list places__list tabs__content">
+        {offers.map((offer, ind) => {
+          return (
+            <PalceCard
+              key={ind}
+              offer={offer}
+              imgClickHandler={this._imgClickHandler}
+              mouseEnterHandler={this._setActiveCardId}
+              mouseLeaveHandler={this._resetActiveCardId}
+            />
+          );
+        })}
+      </div>
+    );
+  }
+
+  _imgClickHandler(activeCardId) {
+    return activeCardId;
+  }
+
+  _setActiveCardId(activeCardId) {
+    this.setState({
+      activeCardId
+    });
+  }
+
+  _resetActiveCardId() {
+    this.setState({
+      activeCardId: null
+    });
+  }
+}
 
 PlacesList.propTypes = {
-  titles: PropTypes.arrayOf(PropTypes.string).isRequired
+  offers: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default PlacesList;

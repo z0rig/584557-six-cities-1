@@ -3,6 +3,7 @@
 exports[`PlaceCard correctly renders 1`] = `
 <article
   className="cities__place-card place-card"
+  onMouseEnter={[Function]}
 >
   <div
     className="place-card__mark"
@@ -21,6 +22,7 @@ exports[`PlaceCard correctly renders 1`] = `
         alt="Place image"
         className="place-card__image"
         height="200"
+        onClick={[Function]}
         src="img/apartment-01.jpg"
         width="260"
       />
@@ -38,16 +40,18 @@ exports[`PlaceCard correctly renders 1`] = `
         <b
           className="place-card__price-value"
         >
-          €120
+          €
+          12000
         </b>
         <span
           className="place-card__price-text"
         >
-          / night
+          / 
+          day
         </span>
       </div>
       <button
-        className="place-card__bookmark-button button"
+        className="place-card__bookmark-button button undefined"
         type="button"
       >
         <svg
@@ -75,7 +79,7 @@ exports[`PlaceCard correctly renders 1`] = `
         <span
           style={
             Object {
-              "width": "93%",
+              "width": "5%",
             }
           }
         />
@@ -92,13 +96,13 @@ exports[`PlaceCard correctly renders 1`] = `
       <a
         href="#"
       >
-        test
+        Old palace
       </a>
     </h2>
     <p
       className="place-card__type"
     >
-      Apartment
+      Palace
     </p>
   </div>
 </article>
