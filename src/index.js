@@ -3,4 +3,6 @@ import ReactDOM from "react-dom";
 
 import App from "./components/app/app.jsx";
 
-ReactDOM.render(<App />, document.getElementById(`root`));
+import offers from "./mocks/offers.js";
+
+ReactDOM.render(<App offers={offers} />, document.getElementById(`root`));

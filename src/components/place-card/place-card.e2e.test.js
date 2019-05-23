@@ -3,17 +3,39 @@ import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import PlaceCard from "./place-card.jsx";
 
-Enzyme.configure({adapter: new Adapter()});
+const mock = {
+  id: `asdf0`,
+  isPremium: true,
+  imgSrc: `img/apartment-01.jpg`,
+  price: 12000,
+  period: `day`,
+  inBookmarks: true,
+  raiting: 100,
+  title: `Old palace`,
+  housingType: `Palace`
+};
 
-it(`PlaceCard title correctly handles clicks`, () => {
-  const clickHandler = jest.fn();
-  const placeCard = shallow(
-      <PlaceCard title="test" headerClickHandler={clickHandler} />
+Enzyme.configure({adapter: new Adapter()});
+const imgClickHandler = jest.fn();
+const mouseEnterHandler = jest.fn();
+
+it(`PlaceCard img correctly handles clicks`, () => {
+  const placesCard = shallow(
+      <PlaceCard
+        offer={mock}
+        imgClickHandler={imgClickHandler}
+        mouseEnterHandler={mouseEnterHandler}
+      />
   );
 
-  const title = placeCard.find(`.place-card__name a`);
+  const card = placesCard.find(`.place-card`);
+  const cardImg = card.find(`.place-card__image-wrapper img`);
 
-  title.simulate(`click`, {preventDefault() {}});
+  card.simulate(`mouseEnter`);
+  cardImg.simulate(`click`, {
+    preventDefault: () => {}
+  });
 
-  expect(clickHandler).toHaveBeenCalledTimes(1);
+  expect(mouseEnterHandler).toHaveBeenCalledWith(`asdf0`);
+  expect(imgClickHandler).toHaveBeenCalledWith(`asdf0`);
 });
