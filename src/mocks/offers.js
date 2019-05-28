@@ -8,7 +8,8 @@ const offers = [
     inBookmarks: true,
     raiting: 100,
     title: `Old palace`,
-    housingType: `Palace`
+    housingType: `Palace`,
+    coord: [52.3909553943508, 4.85309666406198]
   },
   {
     id: `dasd1`,
@@ -19,7 +20,8 @@ const offers = [
     inBookmarks: false,
     raiting: 50,
     title: `Dilapidated bungalow`,
-    housingType: `Bungalow`
+    housingType: `Bungalow`,
+    coord: [52.369553943508, 4.85309666406198]
   },
   {
     id: `dasda2`,
@@ -30,7 +32,8 @@ const offers = [
     inBookmarks: false,
     raiting: 75,
     title: `Haunted Apartment`,
-    housingType: `Apartment`
+    housingType: `Apartment`,
+    coord: [52.3909553943508, 4.929309666406198]
   },
   {
     id: `ddasdf3`,
@@ -41,8 +44,8 @@ const offers = [
     inBookmarks: false,
     raiting: 35,
     title: `Hostel in the basement`,
-    housingType: `KoykoMesto`
+    housingType: `KoykoMesto`,
+    coord: [52.3809553943508, 4.939309666406198]
   }
 ];
-
 export default offers;

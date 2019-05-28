@@ -55,8 +55,9 @@ const PlaceCard = (props) => {
             <span className="place-card__price-text">&#47;&nbsp;{period}</span>
           </div>
           <button
-            className={`place-card__bookmark-button button ${inBookmarks &&
-              `place-card__bookmark-button--active`}`}
+            className={`place-card__bookmark-button button${
+              inBookmarks ? ` place-card__bookmark-button--active` : ``
+            }`}
             type="button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
@@ -95,8 +96,10 @@ PlaceCard.propTypes = {
       `Bungalow`,
       `Apartment`,
       `KoykoMesto`
-    ])
+    ]),
+    coord: PropTypes.arrayOf(PropTypes.number).isRequired
   }).isRequired,
+  coord: PropTypes.arrayOf(PropTypes.number),
   imgClickHandler: PropTypes.func,
   mouseEnterHandler: PropTypes.func,
   mouseLeaveHandler: PropTypes.func

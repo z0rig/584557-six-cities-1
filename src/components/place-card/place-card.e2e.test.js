@@ -12,7 +12,8 @@ const mock = {
   inBookmarks: true,
   raiting: 100,
   title: `Old palace`,
-  housingType: `Palace`
+  housingType: `Palace`,
+  coord: [52.3909553943508, 4.85309666406198]
 };
 
 Enzyme.configure({adapter: new Adapter()});
