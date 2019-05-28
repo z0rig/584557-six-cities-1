@@ -14,7 +14,7 @@ class Map extends React.PureComponent {
     const amsterdamCityCoord = [52.38333, 4.9];
     const zoom = 12;
 
-    const pin = leaflet.icon({
+    const icon = leaflet.icon({
       iconUrl: `img/mapPin.svg`,
       iconSize: [30, 30]
     });
@@ -37,7 +37,7 @@ class Map extends React.PureComponent {
       .addTo(map);
 
     offers.forEach((it) => {
-      leaflet.marker(it.coord, {pin}).addTo(map);
+      leaflet.marker(it.coord, {icon}).addTo(map);
     });
   }
 
