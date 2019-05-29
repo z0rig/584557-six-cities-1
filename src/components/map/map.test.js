@@ -1,5 +1,6 @@
 import React from "react";
-import renderer from "react-test-renderer";
+import Enzyme, {mount} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
 import Map from "./map.jsx";
 
 const mock = [
@@ -17,7 +18,9 @@ const mock = [
   }
 ];
 
+Enzyme.configure({adapter: new Adapter()});
+
 it(`Map correctly renders`, () => {
-  const tree = renderer.create(<Map offers={mock} />).toJSON();
-  expect(tree).toMatchSnapshot();
+  const map = mount(<Map offers={mock} />);
+  expect(map).toMatchSnapshot();
 });
