@@ -51,7 +51,7 @@ exports[`PlaceCard correctly renders 1`] = `
         </span>
       </div>
       <button
-        className="place-card__bookmark-button button undefined"
+        className="place-card__bookmark-button button place-card__bookmark-button--active"
         type="button"
       >
         <svg

@@ -1,6 +1,7 @@
 import React from "react";
-import renderer from "react-test-renderer";
-import PlacesList from "./places-list.jsx";
+import Enzyme, {mount} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import Map from "./map.jsx";
 
 const mock = [
   {
@@ -17,7 +18,9 @@ const mock = [
   }
 ];
 
-it(`PlacesList correctly renders`, () => {
-  const tree = renderer.create(<PlacesList offers={mock} />).toJSON();
-  expect(tree).toMatchSnapshot();
+Enzyme.configure({adapter: new Adapter()});
+
+it(`Map correctly renders`, () => {
+  const map = mount(<Map offers={mock} />);
+  expect(map).toMatchSnapshot();
 });

@@ -1,5 +1,6 @@
 import React from "react";
-import renderer from "react-test-renderer";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
 import App from "./app.jsx";
 
 const mock = [
@@ -16,7 +17,9 @@ const mock = [
   }
 ];
 
+Enzyme.configure({adapter: new Adapter()});
+
 it(`App correctly renders`, () => {
-  const tree = renderer.create(<App offers={mock} />).toJSON();
-  expect(tree).toMatchSnapshot();
+  const app = shallow(<App offers={mock} />);
+  expect(app).toMatchSnapshot();
 });

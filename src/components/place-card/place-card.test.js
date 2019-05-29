@@ -8,9 +8,11 @@ const mock = {
   imgSrc: `img/apartment-01.jpg`,
   price: 12000,
   period: `day`,
+  inBookmarks: true,
   raiting: 5,
   title: `Old palace`,
-  housingType: `Palace`
+  housingType: `Palace`,
+  coord: [52.3909553943508, 4.85309666406198]
 };
 
 it(`PlaceCard correctly renders`, () => {
