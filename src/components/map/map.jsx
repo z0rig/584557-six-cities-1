@@ -2,6 +2,8 @@ import React from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 
+import mapSettings from "./mapSettings.js";
+
 class Map extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -11,21 +13,17 @@ class Map extends React.PureComponent {
 
   componentDidMount() {
     const {offers} = this.props;
-    const amsterdamCityCoord = [52.38333, 4.9];
-    const zoom = 12;
+    const {cityCoords, zoom, iconUrl, iconSize} = mapSettings;
 
-    const icon = leaflet.icon({
-      iconUrl: `img/mapPin.svg`,
-      iconSize: [30, 30]
-    });
+    const icon = leaflet.icon({iconUrl, iconSize});
 
     const map = leaflet.map(this._mapContaineer.current, {
-      center: amsterdamCityCoord,
+      center: cityCoords,
       zoom,
       zoomControl: false,
       marker: true
     });
-    map.setView(amsterdamCityCoord, zoom);
+    map.setView(cityCoords, zoom);
 
     leaflet
       .tileLayer(
