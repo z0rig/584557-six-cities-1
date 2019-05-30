@@ -1,7 +1,11 @@
 import React from "react";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
 import PalceCard from "../place-card/place-card.jsx";
+
+import offersMock from "../../mocks/offers.js";
+import {getOffersByCity} from "../../utils/utils.js";
 
 class PlacesList extends React.PureComponent {
   constructor(props) {
@@ -57,4 +61,10 @@ PlacesList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object)
 };
 
-export default PlacesList;
+const mapStateToProps = (state) => {
+  return {offers: getOffersByCity(offersMock, state.currentCity)};
+};
+
+export {PlacesList};
+
+export default connect(mapStateToProps)(PlacesList);

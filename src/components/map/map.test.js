@@ -1,7 +1,7 @@
 import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import Map from "./map.jsx";
+import {Map} from "./map.jsx";
 
 const mock = [
   {
@@ -21,6 +21,6 @@ const mock = [
 Enzyme.configure({adapter: new Adapter()});
 
 it(`Map correctly renders`, () => {
-  const map = mount(<Map offers={mock} />);
+  const map = mount(<Map offers={mock} currentCity="Amsterdam" />);
   expect(map).toMatchSnapshot();
 });

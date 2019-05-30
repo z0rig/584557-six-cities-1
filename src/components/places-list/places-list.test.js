@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import PlacesList from "./places-list.jsx";
+import {PlacesList} from "./places-list.jsx";
 
 const mock = [
   {
