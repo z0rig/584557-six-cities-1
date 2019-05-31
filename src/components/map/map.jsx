@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 
 import mapSettings from "./mapSettings.js";
 
-import offersMock from "../../mocks/offers.js";
 import {getOffersByCity} from "../../utils/utils.js";
 import {locations} from "../../reducer/reducer.js";
 
@@ -94,7 +93,7 @@ Map.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    offers: getOffersByCity(offersMock, state.currentCity),
+    offers: getOffersByCity(state.offers, state.currentCity),
     currentCity: state.currentCity
   };
 };

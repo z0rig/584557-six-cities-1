@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 
 import PalceCard from "../place-card/place-card.jsx";
 
-import offersMock from "../../mocks/offers.js";
 import {getOffersByCity} from "../../utils/utils.js";
 
 class PlacesList extends React.PureComponent {
@@ -62,7 +61,7 @@ PlacesList.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  return {offers: getOffersByCity(offersMock, state.currentCity)};
+  return {offers: getOffersByCity(state.offers, state.currentCity)};
 };
 
 export {PlacesList};
