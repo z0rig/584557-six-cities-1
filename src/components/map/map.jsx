@@ -1,8 +1,12 @@
 import React from "react";
+import {connect} from "react-redux";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 
 import mapSettings from "./mapSettings.js";
+
+import {getOffersByCity} from "../../utils/utils.js";
+import {locations} from "../../reducer/reducer.js";
 
 class Map extends React.PureComponent {
   constructor(props) {
@@ -12,18 +16,19 @@ class Map extends React.PureComponent {
   }
 
   componentDidMount() {
-    const {offers} = this.props;
-    const {cityCoords, zoom, iconUrl, iconSize} = mapSettings;
+    const {offers, currentCity} = this.props;
+    const {zoom, iconUrl, iconSize} = mapSettings;
+    const {coords} = locations[currentCity];
 
-    const icon = leaflet.icon({iconUrl, iconSize});
+    this._icon = leaflet.icon({iconUrl, iconSize});
 
-    const map = leaflet.map(this._mapContaineer.current, {
-      center: cityCoords,
+    this._map = leaflet.map(this._mapContaineer.current, {
+      center: coords,
       zoom,
       zoomControl: false,
       marker: true
     });
-    map.setView(cityCoords, zoom);
+    this._map.setView(coords, zoom);
 
     leaflet
       .tileLayer(
@@ -32,10 +37,22 @@ class Map extends React.PureComponent {
             attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
           }
       )
-      .addTo(map);
+      .addTo(this._map);
 
     offers.forEach((it) => {
-      leaflet.marker(it.coord, {icon}).addTo(map);
+      leaflet.marker(it.coord, this._icon).addTo(this._map);
+    });
+  }
+
+  componentDidUpdate() {
+    const {offers, currentCity} = this.props;
+    const {zoom} = mapSettings;
+    const {coords} = locations[currentCity];
+
+    this._map.flyTo(coords, zoom);
+
+    offers.forEach((it) => {
+      leaflet.marker(it.coord, this._icon).addTo(this._map);
     });
   }
 
@@ -70,7 +87,17 @@ Map.propTypes = {
           `KoykoMesto`
         ])
       }).isRequired
-  )
+  ),
+  currentCity: PropTypes.string.isRequired
 };
 
-export default Map;
+const mapStateToProps = (state) => {
+  return {
+    offers: getOffersByCity(state.offers, state.currentCity),
+    currentCity: state.currentCity
+  };
+};
+
+export {Map};
+
+export default connect(mapStateToProps)(Map);

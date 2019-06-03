@@ -1,4 +1,4 @@
-const offers = [
+const offersMock = [
   {
     id: `asdf0`,
     isPremium: true,
@@ -9,7 +9,8 @@ const offers = [
     raiting: 100,
     title: `Old palace`,
     housingType: `Palace`,
-    coord: [52.3909553943508, 4.85309666406198]
+    coord: [52.3909553943508, 4.85309666406198],
+    city: `Amsterdam`
   },
   {
     id: `dasd1`,
@@ -21,7 +22,8 @@ const offers = [
     raiting: 50,
     title: `Dilapidated bungalow`,
     housingType: `Bungalow`,
-    coord: [52.369553943508, 4.85309666406198]
+    coord: [52.369553943508, 4.85309666406198],
+    city: `Amsterdam`
   },
   {
     id: `dasda2`,
@@ -33,7 +35,8 @@ const offers = [
     raiting: 75,
     title: `Haunted Apartment`,
     housingType: `Apartment`,
-    coord: [52.3909553943508, 4.929309666406198]
+    coord: [52.3909553943508, 4.929309666406198],
+    city: `Amsterdam`
   },
   {
     id: `ddasdf3`,
@@ -45,7 +48,73 @@ const offers = [
     raiting: 35,
     title: `Hostel in the basement`,
     housingType: `KoykoMesto`,
-    coord: [52.3809553943508, 4.939309666406198]
+    coord: [52.3809553943508, 4.939309666406198],
+    city: `Amsterdam`
+  },
+  {
+    id: `faddf0`,
+    isPremium: true,
+    imgSrc: ``,
+    price: 11000,
+    period: `month`,
+    inBookmarks: true,
+    raiting: 100,
+    title: `Old palace in mountains`,
+    housingType: `Palace`,
+    coord: [41.687834, 44.809531],
+    city: `Tbilisi`
+  },
+  {
+    id: `flkjf0`,
+    isPremium: true,
+    imgSrc: ``,
+    price: 11000,
+    period: `month`,
+    inBookmarks: true,
+    raiting: 100,
+    title: `Hostel in the basement`,
+    housingType: `KoykoMesto`,
+    coord: [59.882981, 30.226238],
+    city: `Saint Petersburg`
+  },
+  {
+    id: `amtjf0`,
+    isPremium: true,
+    imgSrc: ``,
+    price: 11000,
+    period: `month`,
+    inBookmarks: true,
+    raiting: 100,
+    title: `Haunted Apartment`,
+    housingType: `Apartment`,
+    coord: [39.91651, 116.390747],
+    city: `Beijing`
+  },
+  {
+    id: `ldjenf`,
+    isPremium: true,
+    imgSrc: ``,
+    price: 11000,
+    period: `month`,
+    inBookmarks: true,
+    raiting: 100,
+    title: `Dilapidated bungalow`,
+    housingType: `Bungalow`,
+    coord: [-34.621025, -58.341329],
+    city: `Buenos Aires`
+  },
+  {
+    id: `ladwnf`,
+    isPremium: true,
+    imgSrc: ``,
+    price: 11000,
+    period: `month`,
+    inBookmarks: true,
+    raiting: 100,
+    title: `Dilapidated bungalow`,
+    housingType: `Bungalow`,
+    coord: [46.390642, -63.792638],
+    city: `Summerside`
   }
 ];
-export default offers;
+export default offersMock;
