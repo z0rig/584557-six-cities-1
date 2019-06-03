@@ -2,12 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const PlaceCard = (props) => {
-  const {
-    offer,
-    imgClickHandler,
-    mouseEnterHandler,
-    mouseLeaveHandler
-  } = props;
+  const {offer, activeItemId, itemClickHandler} = props;
   const {
     id,
     isPremium,
@@ -22,11 +17,9 @@ const PlaceCard = (props) => {
 
   return (
     <article
-      className="cities__place-card place-card"
-      onMouseEnter={() => {
-        mouseEnterHandler(id);
-      }}
-      onMouseLeave={mouseLeaveHandler}
+      className={`cities__place-card place-card${
+        activeItemId === id ? ` active` : ``
+      }`}
     >
       {isPremium && (
         <div className="place-card__mark">
@@ -43,7 +36,7 @@ const PlaceCard = (props) => {
             alt="Place image"
             onClick={(evt) => {
               evt.preventDefault();
-              imgClickHandler(id);
+              itemClickHandler(id);
             }}
           />
         </a>
@@ -82,6 +75,7 @@ const PlaceCard = (props) => {
 };
 
 PlaceCard.propTypes = {
+  activeItemId: PropTypes.string,
   offer: PropTypes.shape({
     id: PropTypes.string.isRequired,
     isPremium: PropTypes.bool,
@@ -100,9 +94,7 @@ PlaceCard.propTypes = {
     coord: PropTypes.arrayOf(PropTypes.number).isRequired
   }).isRequired,
   coord: PropTypes.arrayOf(PropTypes.number),
-  imgClickHandler: PropTypes.func,
-  mouseEnterHandler: PropTypes.func,
-  mouseLeaveHandler: PropTypes.func
+  itemClickHandler: PropTypes.func
 };
 
 export default PlaceCard;
