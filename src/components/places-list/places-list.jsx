@@ -4,60 +4,32 @@ import PropTypes from "prop-types";
 
 import PalceCard from "../place-card/place-card.jsx";
 
+import withActiveItem from "../../HOCs/with-active-item.jsx";
+
 import {getOffersByCity} from "../../utils/utils.js";
 
-class PlacesList extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeCardId: null
-    };
-
-    this._imgClickHandler = this._imgClickHandler.bind(this);
-    this._setActiveCardId = this._setActiveCardId.bind(this);
-    this._resetActiveCardId = this._resetActiveCardId.bind(this);
-  }
-
-  render() {
-    const {offers} = this.props;
-
-    return (
-      <div className="cities__places-list places__list tabs__content">
-        {offers.map((offer, ind) => {
-          return (
-            <PalceCard
-              key={ind}
-              offer={offer}
-              imgClickHandler={this._imgClickHandler}
-              mouseEnterHandler={this._setActiveCardId}
-              mouseLeaveHandler={this._resetActiveCardId}
-            />
-          );
-        })}
-      </div>
-    );
-  }
-
-  _imgClickHandler(activeCardId) {
-    return activeCardId;
-  }
-
-  _setActiveCardId(activeCardId) {
-    this.setState({
-      activeCardId
-    });
-  }
-
-  _resetActiveCardId() {
-    this.setState({
-      activeCardId: null
-    });
-  }
-}
+const PlacesList = (props) => {
+  const {offers, activeItemId, changeActiveItemId} = props;
+  return (
+    <div className="cities__places-list places__list tabs__content">
+      {offers.map((offer, ind) => {
+        return (
+          <PalceCard
+            key={ind}
+            offer={offer}
+            activeItemId={activeItemId}
+            itemClickHandler={changeActiveItemId}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 PlacesList.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object)
+  offers: PropTypes.arrayOf(PropTypes.object),
+  activeItemId: PropTypes.string,
+  changeActiveItemId: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
@@ -66,4 +38,4 @@ const mapStateToProps = (state) => {
 
 export {PlacesList};
 
-export default connect(mapStateToProps)(PlacesList);
+export default connect(mapStateToProps)(withActiveItem(PlacesList));

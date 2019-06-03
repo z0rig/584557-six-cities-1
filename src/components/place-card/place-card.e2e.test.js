@@ -17,26 +17,19 @@ const mock = {
 };
 
 Enzyme.configure({adapter: new Adapter()});
-const imgClickHandler = jest.fn();
-const mouseEnterHandler = jest.fn();
+const itemClickHandler = jest.fn();
 
 it(`PlaceCard img correctly handles clicks`, () => {
   const placesCard = shallow(
-      <PlaceCard
-        offer={mock}
-        imgClickHandler={imgClickHandler}
-        mouseEnterHandler={mouseEnterHandler}
-      />
+      <PlaceCard offer={mock} itemClickHandler={itemClickHandler} />
   );
 
   const card = placesCard.find(`.place-card`);
   const cardImg = card.find(`.place-card__image-wrapper img`);
 
-  card.simulate(`mouseEnter`);
   cardImg.simulate(`click`, {
     preventDefault: () => {}
   });
 
-  expect(mouseEnterHandler).toHaveBeenCalledWith(`asdf0`);
-  expect(imgClickHandler).toHaveBeenCalledWith(`asdf0`);
+  expect(itemClickHandler).toHaveBeenCalledWith(`asdf0`);
 });
