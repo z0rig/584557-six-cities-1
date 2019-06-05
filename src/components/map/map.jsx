@@ -5,30 +5,69 @@ import PropTypes from "prop-types";
 
 import mapSettings from "./mapSettings.js";
 
-import {getOffersByCity} from "../../utils/utils.js";
-import {locations} from "../../reducer/reducer.js";
+const defaultLocation = {
+  latitude: 0,
+  longitude: 0,
+  zoom: 13
+};
+
+import {
+  getCurrentCityOffers,
+  getCurrentCity,
+  getLocations
+} from "../../reducer/offers/selectors";
 
 class Map extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this._mapContaineer = React.createRef();
+    this._mapContainer = React.createRef();
   }
 
   componentDidMount() {
-    const {offers, currentCity} = this.props;
-    const {zoom, iconUrl, iconSize} = mapSettings;
-    const {coords} = locations[currentCity];
+    const {offers, currentCity, locations = {}} = this.props;
+    const currentLocation = locations.size ?
+      locations.get(currentCity) :
+      defaultLocation;
+    const {latitude, longitude, zoom} = currentLocation;
+    const cityCoords = [latitude, longitude];
+
+    this._initMap(cityCoords, zoom, offers);
+  }
+
+  componentDidUpdate() {
+    const {offers, currentCity, locations} = this.props;
+    const currentLocation = locations.get(currentCity);
+    const {latitude, longitude, zoom} = currentLocation;
+    const cityCoords = [latitude, longitude];
+
+    this._updateMap(cityCoords, zoom, offers);
+  }
+
+  render() {
+    return (
+      <div className="cities__right-section">
+        <section
+          className="cities__map map"
+          id="map"
+          ref={this._mapContainer}
+        />
+      </div>
+    );
+  }
+
+  _initMap(cityCoords, zoom, offers = []) {
+    const {iconUrl, iconSize} = mapSettings;
 
     this._icon = leaflet.icon({iconUrl, iconSize});
 
-    this._map = leaflet.map(this._mapContaineer.current, {
-      center: coords,
+    this._map = leaflet.map(this._mapContainer.current, {
+      center: cityCoords,
       zoom,
       zoomControl: false,
       marker: true
     });
-    this._map.setView(coords, zoom);
+    this._map.setView(cityCoords, zoom);
 
     leaflet
       .tileLayer(
@@ -40,61 +79,30 @@ class Map extends React.PureComponent {
       .addTo(this._map);
 
     offers.forEach((it) => {
-      leaflet.marker(it.coord, this._icon).addTo(this._map);
+      leaflet.marker([it.location.latitude, it.location.longitude], this._icon).addTo(this._map);
     });
   }
 
-  componentDidUpdate() {
-    const {offers, currentCity} = this.props;
-    const {zoom} = mapSettings;
-    const {coords} = locations[currentCity];
-
-    this._map.flyTo(coords, zoom);
+  _updateMap(cityCoords, zoom, offers) {
+    this._map.setView(cityCoords, zoom);
 
     offers.forEach((it) => {
-      leaflet.marker(it.coord, this._icon).addTo(this._map);
+      leaflet.marker([it.location.latitude, it.location.longitude], this._icon).addTo(this._map);
     });
-  }
-
-  render() {
-    return (
-      <div className="cities__right-section">
-        <section
-          className="cities__map map"
-          id="map"
-          ref={this._mapContaineer}
-        />
-      </div>
-    );
   }
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        isPremium: PropTypes.bool,
-        imgSrc: PropTypes.string,
-        price: PropTypes.number.isRequired,
-        period: PropTypes.oneOf([`month`, `day`]),
-        inBookmarks: PropTypes.bool.isRequired,
-        raiting: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        housingType: PropTypes.oneOf([
-          `Palace`,
-          `Bungalow`,
-          `Apartment`,
-          `KoykoMesto`
-        ])
-      }).isRequired
-  ),
-  currentCity: PropTypes.string.isRequired
+  offers: PropTypes.array,
+  currentCity: PropTypes.string,
+  locations: PropTypes.object
 };
 
 const mapStateToProps = (state) => {
   return {
-    offers: getOffersByCity(state.offers, state.currentCity),
-    currentCity: state.currentCity
+    offers: getCurrentCityOffers(state),
+    currentCity: getCurrentCity(state),
+    locations: getLocations(state)
   };
 };
 

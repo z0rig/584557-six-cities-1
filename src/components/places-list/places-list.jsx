@@ -4,15 +4,16 @@ import PropTypes from "prop-types";
 
 import PalceCard from "../place-card/place-card.jsx";
 
-import withActiveItem from "../../HOCs/with-active-item.jsx";
+import {getCurrentCityOffers} from "../../reducer/offers/selectors";
 
-import {getOffersByCity} from "../../utils/utils.js";
+import withActiveItem from "../../HOCs/with-active-item.jsx";
 
 const PlacesList = (props) => {
   const {offers, activeItemId, changeActiveItemId} = props;
+
   return (
     <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer, ind) => {
+      {offers ? offers.map((offer, ind) => {
         return (
           <PalceCard
             key={ind}
@@ -21,7 +22,7 @@ const PlacesList = (props) => {
             itemClickHandler={changeActiveItemId}
           />
         );
-      })}
+      }) : null}
     </div>
   );
 };
@@ -33,7 +34,9 @@ PlacesList.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  return {offers: getOffersByCity(state.offers, state.currentCity)};
+  return {
+    offers: getCurrentCityOffers(state)
+  };
 };
 
 export {PlacesList};

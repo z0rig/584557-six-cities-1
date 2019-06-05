@@ -10,8 +10,8 @@ const mock = [
     imgSrc: `img/apartment-01.jpg`,
     price: 12000,
     period: `day`,
-    inBookmarks: true,
-    raiting: 100,
+    isFavorite: true,
+    rating: 100,
     title: `Old palace`,
     housingType: `Palace`
   }
