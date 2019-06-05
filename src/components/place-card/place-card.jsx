@@ -3,16 +3,16 @@ import PropTypes from "prop-types";
 
 const PlaceCard = (props) => {
   const {offer, activeItemId, itemClickHandler} = props;
+
   const {
     id,
-    isPremium,
-    imgSrc,
+    is_premium: isPremium,
+    preview_image: previewImage,
     price,
-    period,
-    inBookmarks,
-    raiting,
+    is_favorite: isFavorite,
+    rating,
     title,
-    housingType
+    type
   } = offer;
 
   return (
@@ -30,7 +30,7 @@ const PlaceCard = (props) => {
         <a href="#">
           <img
             className="place-card__image"
-            src={imgSrc || `https://place-hold.it/260x200`}
+            src={previewImage || `https://place-hold.it/260x200`}
             width="260"
             height="200"
             alt="Place image"
@@ -45,11 +45,11 @@ const PlaceCard = (props) => {
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
-            <span className="place-card__price-text">&#47;&nbsp;{period}</span>
+            <span className="place-card__price-text">&#47;&nbsp;month</span>
           </div>
           <button
             className={`place-card__bookmark-button button${
-              inBookmarks ? ` place-card__bookmark-button--active` : ``
+              isFavorite ? ` place-card__bookmark-button--active` : ``
             }`}
             type="button"
           >
@@ -61,14 +61,14 @@ const PlaceCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${raiting}%`}} />
+            <span style={{width: `${rating * 20}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
           <a href="#">{title}</a>
         </h2>
-        <p className="place-card__type">{housingType}</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );
@@ -76,24 +76,7 @@ const PlaceCard = (props) => {
 
 PlaceCard.propTypes = {
   activeItemId: PropTypes.string,
-  offer: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool,
-    imgSrc: PropTypes.string,
-    price: PropTypes.number.isRequired,
-    period: PropTypes.oneOf([`month`, `day`]),
-    inBookmarks: PropTypes.bool.isRequired,
-    raiting: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    housingType: PropTypes.oneOf([
-      `Palace`,
-      `Bungalow`,
-      `Apartment`,
-      `KoykoMesto`
-    ]),
-    coord: PropTypes.arrayOf(PropTypes.number).isRequired
-  }).isRequired,
-  coord: PropTypes.arrayOf(PropTypes.number),
+  offer: PropTypes.object.isRequired,
   itemClickHandler: PropTypes.func
 };
 

@@ -9,8 +9,8 @@ const mock = {
   imgSrc: `img/apartment-01.jpg`,
   price: 12000,
   period: `day`,
-  inBookmarks: true,
-  raiting: 100,
+  isFavorite: true,
+  rating: 100,
   title: `Old palace`,
   housingType: `Palace`,
   coord: [52.3909553943508, 4.85309666406198]
@@ -28,7 +28,7 @@ it(`PlaceCard img correctly handles clicks`, () => {
   const cardImg = card.find(`.place-card__image-wrapper img`);
 
   cardImg.simulate(`click`, {
-    preventDefault: () => {}
+    preventDefault: () => { }
   });
 
   expect(itemClickHandler).toHaveBeenCalledWith(`asdf0`);

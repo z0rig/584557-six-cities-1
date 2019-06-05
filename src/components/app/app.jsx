@@ -4,8 +4,6 @@ import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 import LocationsList from "../locations-list/locations-list.jsx";
 
-import {locations} from "../../reducer/reducer.js";
-
 const App = () => {
   return (
     <Fragment>
@@ -66,7 +64,7 @@ const App = () => {
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <LocationsList locations={Object.keys(locations)} />
+        <LocationsList />
         <div className="cities__places-wrapper">
           <div className="cities__places-container container">
             <section className="cities__places places">

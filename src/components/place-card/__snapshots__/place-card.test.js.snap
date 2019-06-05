@@ -5,13 +5,6 @@ exports[`PlaceCard correctly renders 1`] = `
   className="cities__place-card place-card"
 >
   <div
-    className="place-card__mark"
-  >
-    <span>
-      Premium
-    </span>
-  </div>
-  <div
     className="cities__image-wrapper place-card__image-wrapper"
   >
     <a
@@ -22,7 +15,7 @@ exports[`PlaceCard correctly renders 1`] = `
         className="place-card__image"
         height="200"
         onClick={[Function]}
-        src="img/apartment-01.jpg"
+        src="https://place-hold.it/260x200"
         width="260"
       />
     </a>
@@ -45,12 +38,11 @@ exports[`PlaceCard correctly renders 1`] = `
         <span
           className="place-card__price-text"
         >
-          / 
-          day
+          / month
         </span>
       </div>
       <button
-        className="place-card__bookmark-button button place-card__bookmark-button--active"
+        className="place-card__bookmark-button button"
         type="button"
       >
         <svg
@@ -78,7 +70,7 @@ exports[`PlaceCard correctly renders 1`] = `
         <span
           style={
             Object {
-              "width": "5%",
+              "width": "100%",
             }
           }
         />
@@ -100,9 +92,7 @@ exports[`PlaceCard correctly renders 1`] = `
     </h2>
     <p
       className="place-card__type"
-    >
-      Palace
-    </p>
+    />
   </div>
 </article>
 `;

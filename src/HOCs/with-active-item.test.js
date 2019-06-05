@@ -11,8 +11,8 @@ const mock = [
     imgSrc: `img/apartment-01.jpg`,
     price: 12000,
     period: `day`,
-    inBookmarks: true,
-    raiting: 5,
+    isFavorite: true,
+    rating: 5,
     title: `Old palace`,
     housingType: `Palace`,
     coord: [52.3909553943508, 4.85309666406198]
@@ -28,7 +28,7 @@ it(`Should change activeItemId correctly when item img was clicked`, () => {
 
   const itemImg = wrapper.find(`img`);
   itemImg.simulate(`click`, {
-    preventDefault: () => {}
+    preventDefault: () => { }
   });
 
   wrapper.update();
