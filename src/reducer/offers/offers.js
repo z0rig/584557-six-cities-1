@@ -2,30 +2,30 @@ const initialState = {
   offers: []
 };
 
-const actionType = {
+const actionTypes = {
   LOAD_OFFERS: `LOAD_OFFERS`
 };
 
-const actionCreator = {
+const actionCreators = {
   loadOffers(offers) {
     return {
-      type: actionType.LOAD_OFFERS,
+      type: actionTypes.LOAD_OFFERS,
       offers
     };
   }
 };
 
-const operation = {
+const operations = {
   loadOffers: () => (dispath, _getState, api) => {
     return api.get(`\hotels`).then((response) => {
-      dispath(actionCreator.loadOffers(response.data));
+      dispath(actionCreators.loadOffers(response.data));
     });
   }
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionType.LOAD_OFFERS:
+    case actionTypes.LOAD_OFFERS:
       return {
         ...state,
         offers: action.offers
@@ -37,8 +37,8 @@ const reducer = (state = initialState, action) => {
 };
 
 export {
-  actionType,
-  actionCreator,
-  operation,
+  actionTypes,
+  actionCreators,
+  operations,
   reducer
 };

@@ -9,10 +9,10 @@ const withActiveItem = (Component) => {
         activeItemId: null
       };
 
-      this._itemClickHandler = this._itemClickHandler.bind(this);
+      this._changeActiveItemId = this._changeActiveItemId.bind(this);
     }
 
-    _itemClickHandler(activeItemId) {
+    _changeActiveItemId(activeItemId) {
       this.setState({activeItemId});
     }
 
@@ -23,14 +23,17 @@ const withActiveItem = (Component) => {
         <Component
           {...this.props}
           activeItemId={activeItemId}
-          changeActiveItemId={this._itemClickHandler}
+          changeActiveItemId={this._changeActiveItemId}
         />
       );
     }
   }
-  WithActiveItem.displayName = `WithActiveItem(${Component.displayName ||
+
+  WithActiveItem.displayName =
+    `WithActiveItem(${Component.displayName ||
     Component.name ||
     `Component`})`;
+
   return WithActiveItem;
 };
 

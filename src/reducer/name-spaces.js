@@ -2,6 +2,7 @@
 const NameSpace = {
   OFFERS: `OFFERS`,
   CURRENT_CITY: `CURRENT_CITY`,
+  AUTHORIZATION_REQUIRED: `AUTHORIZATION_REQUIRED`
 };
 
 export default NameSpace;

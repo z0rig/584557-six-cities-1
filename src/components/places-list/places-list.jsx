@@ -6,7 +6,7 @@ import PalceCard from "../place-card/place-card.jsx";
 
 import {getCurrentCityOffers} from "../../reducer/offers/selectors";
 
-import withActiveItem from "../../HOCs/with-active-item.jsx";
+import withActiveItem from "../../HOCs/with-active-item/with-active-item.jsx";
 
 const PlacesList = (props) => {
   const {offers, activeItemId, changeActiveItemId} = props;
