@@ -1,10 +1,22 @@
 import React, {Fragment} from "react";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 import LocationsList from "../locations-list/locations-list.jsx";
+import SignIn from "../sign-in/sign-in.jsx";
+import SignInLink from "../sign-in-link/sign-in-link.jsx";
 
-const App = () => {
+import {getAuthorizationStatus} from '../../reducer/user/selectors';
+
+const App = (props) => {
+  const {isAuthorizationRequired} = props;
+
+  if (isAuthorizationRequired) {
+    return <SignIn />;
+  }
+
   return (
     <Fragment>
       <div style={{display: `none`}}>
@@ -46,15 +58,7 @@ const App = () => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a
-                    className="header__nav-link header__nav-link--profile"
-                    href="#"
-                  >
-                    <div className="header__avatar-wrapper user__avatar-wrapper" />
-                    <span className="header__user-name user__name">
-                      Oliver.conner@gmail.com
-                    </span>
-                  </a>
+                  <SignInLink />
                 </li>
               </ul>
             </nav>
@@ -125,4 +129,16 @@ const App = () => {
   );
 };
 
-export default App;
+App.propTypes = {
+  isAuthorizationRequired: PropTypes.bool.isRequired
+};
+
+const mapStateToProps = (state) => {
+  return {
+    isAuthorizationRequired: getAuthorizationStatus(state)
+  };
+};
+
+export {App};
+
+export default connect(mapStateToProps)(App);

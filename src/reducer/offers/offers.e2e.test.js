@@ -1,6 +1,6 @@
 import MockAdapter from 'axios-mock-adapter';
 import createApi from '../../api.js';
-import {actionCreator, operation} from './offers';
+import {actionCreators, operations} from './offers';
 
 const mock = {
   offers: [
@@ -27,7 +27,7 @@ const mock = {
 };
 
 it(`Action creator should return correct offers`, () => {
-  expect(actionCreator.loadOffers(mock.offers)).toEqual({
+  expect(actionCreators.loadOffers(mock.offers)).toEqual({
     type: `LOAD_OFFERS`,
     offers: mock.offers
   });
@@ -37,7 +37,7 @@ it(`Should make correct API call`, () => {
   const dispatch = jest.fn();
   const api = createApi(dispatch);
   const apiMock = new MockAdapter(api);
-  const offersLoader = operation.loadOffers();
+  const offersLoader = operations.loadOffers();
 
   apiMock
     .onGet(`/hotels`)
