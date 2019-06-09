@@ -7,11 +7,11 @@ const getOffers = (state) => {
   return state[NAME_SPACE].offers;
 };
 
-export const getCurrentCity = (state) => {
+const getCurrentCity = (state) => {
   return state[NameSpace.CURRENT_CITY].currentCity;
 };
 
-export const getLocations = createSelector(
+const getLocations = createSelector(
     getOffers,
     (offers) => {
       const locations = new Map();
@@ -23,7 +23,7 @@ export const getLocations = createSelector(
     }
 );
 
-export const getCurrentCityOffers = createSelector(
+const getCurrentCityOffers = createSelector(
     getCurrentCity,
     getOffers,
     (currentCity, offers) => {
@@ -32,3 +32,9 @@ export const getCurrentCityOffers = createSelector(
       });
     }
 );
+
+export {
+  getCurrentCity,
+  getLocations,
+  getCurrentCityOffers,
+};

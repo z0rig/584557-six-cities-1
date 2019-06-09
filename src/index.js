@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {BrowserRouter} from 'react-router-dom';
 
 import thunk from "redux-thunk";
 
@@ -14,7 +15,7 @@ import {operations} from "./reducer/offers/offers";
 
 import App from "./components/app/app.jsx";
 
-const api = createApi((...args) => store.dispatch(...args));
+const api = createApi();
 
 const store = createStore(
     reducer,
@@ -28,7 +29,9 @@ store.dispatch(operations.loadOffers());
 
 ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>,
     document.getElementById(`root`)
 );
